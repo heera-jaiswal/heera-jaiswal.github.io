@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Happy Holi</title>
+    <title>Most Beautiful Woman</title>
     <script src="https://cdn.jsdelivr.net/walkway/0.0.7/walkway.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
@@ -14,19 +14,16 @@
       }      
       path, line, polyline {
         stroke: #000;
-        //stroke: none;
         stroke-width: 5px;
       }
 
       path {
-        
+        fill: transparent;
       }
       .fill-it{      	      	
-      	fill: transparent !important;      	
-      }   
-      .remove-stroke{
-        stroke-width: 0px;
-      }   
+      	fill: #5d5d5d;
+      	stroke-width: 0px;
+      }      
       #face{
       	position: relative;
       	padding: 20px;
@@ -2538,52 +2535,27 @@ m55 -4 c0 -11 -19 -15 -25 -6 -3 5 1 10 9 10 9 0 16 -2 16 -4z"/>
 </svg>
 
 <span id="my_text" style="display: none;font-size:50px;font-family: cursive;position: relative;left:20%;color:#5d5d5d;">
-	Keep Smiling Khusat Billi :D 	
+	Text
 </span>
 
     <script>
-      var color_codes=["#9400D3","#4B0082","#0000FF","#00FF00","#FFFF00","#FF7F00","#FF0000"]
-      var counter=0;
-      var $path=null;
-      var divider=null;
-      function draw(){
-
-        $path.slice(counter,counter+10).css("fill",color_codes[(counter%7)]);
-        counter+=10;
-        if(counter<$path.length){
-          setTimeout(draw,100);
-        }
-        //console.log(counter);
-      }
-      function render(){
+      document.addEventListener('DOMContentLoaded', function() {
         var svg = new Walkway({
           selector: '#face',
-          duration: 10000,
+          duration: 20000,
           easing: 'linear'
         });
-        
-        $path=$("path");
-        $path.each(function(index,obj){
-         $(obj).addClass("fill-it");
-         $(obj).css("fill",color_codes[index%7]);
-         $(obj).css("stroke",color_codes[index%7]);         
-        })
         $("#face").css("visibility","visible");
-        $path.addClass("fill-it");
-        //draw();
-        
         svg.draw(function() {
-          
-          setTimeout(function(){
-            $("#face path").addClass("remove-stroke");
-            $("#face path").removeClass("fill-it");            
-            //$("#face").animate({height:"900px"});            
-            
-          },100);
+        	
+        	setTimeout(function(){
+        		$("#face path").addClass("fill-it");
+        		//$("#face").animate({height:"900px"});
+        		setTimeout(function(){
+        			$("#my_text").slideToggle("fast");
+        		},1000);
+        	},500);
         });
-      }
-      document.addEventListener('DOMContentLoaded', function() {
-        render();
       });
     </script>
   </body>
