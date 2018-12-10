@@ -27,8 +27,9 @@
       }      
       #face{
       	position: relative;
-      	padding: 20px;
-      	left:20%;
+      	padding: 0px;
+        top:20px;
+      	left:5%;
       	display: block;
       	visibility: hidden;
       }
@@ -1844,22 +1845,25 @@ l-2 26 -4 -27 c-5 -31 -23 -39 -23 -10 0 9 4 33 10 51 12 42 7 50 -8 16z"/>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        var svg = new Walkway({
-          selector: '#face',
-          duration: 25000,
-          easing: 'linear'
-        });
-        $("#face").css("visibility","visible");
-        svg.draw(function() {
-        	
-        	setTimeout(function(){
-        		$("#face path").addClass("fill-it");
-        		//$("#face").animate({height:"900px"});
-        		setTimeout(function(){
-        			$("#my_text").slideToggle("fast");
-        		},1000);
-        	},500);
-        });
+        setTimeout(function(){
+            var svg = new Walkway({
+            selector: '#face',
+            duration: 20000,
+            easing: function(t){return t*t/2}
+          });
+          $("#face").css("visibility","visible");
+          svg.draw(function() {
+            
+            setTimeout(function(){
+              $("#face path").addClass("fill-it");
+              //$("#face").animate({height:"900px"});
+              setTimeout(function(){
+                $("#my_text").slideToggle("fast");
+              },1000);
+            },500);
+          });
+        },1500);
+        
       });
     </script>
   </body>
