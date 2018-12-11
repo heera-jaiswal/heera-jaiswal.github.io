@@ -35,7 +35,13 @@
       }
     </style>
   </head>
-<body>	
+<body>
+  <button id="go">Go</button>
+  <audio id="bg_music">
+      <source src="bg_audio2.mp3">
+      Loading...
+  </audio>
+<div id="container" style="display: none;">
 <svg id="face" version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="512.000000pt" height="559.000000pt" viewBox="0 0 512.000000 559.000000"
  preserveAspectRatio="xMidYMid meet">
@@ -1842,27 +1848,34 @@ l-2 26 -4 -27 c-5 -31 -23 -39 -23 -10 0 9 4 33 10 51 12 42 7 50 -8 16z"/>
 -10 -4 -10 -10z"/>
 </g>
 </svg>
-
+</div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function(){
+        $("#go").click(function(){          
+          setTimeout(function(){            
             var svg = new Walkway({
             selector: '#face',
-            duration: 20000,
-            easing: function(t){return t*t/2}
+            duration: 25000,
+            easing: function(t){return t*t*t*t/1.1;}
           });
           $("#face").css("visibility","visible");
-          svg.draw(function() {
-            
+          svg.draw(function() {            
             setTimeout(function(){
-              $("#face path").addClass("fill-it");
-              //$("#face").animate({height:"900px"});
-              setTimeout(function(){
-                $("#my_text").slideToggle("fast");
-              },1000);
-            },500);
+              $("#face path").addClass("fill-it");              
+            },200);
           });
-        },1500);
+          $("#bg_music")[0].play();
+          setTimeout(function(){
+            $("#go").show();
+            $("#container").hide();
+            $("#face path").removeClass("fill-it"); 
+            $("#face").css("visibility","hidden");             
+          },45000);
+        },300);
+        $("#go").hide();
+        $("#container").show();
+        
+        });
         
       });
     </script>
