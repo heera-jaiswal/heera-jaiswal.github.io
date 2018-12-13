@@ -33,22 +33,53 @@
       	display: block;
       	visibility: hidden;
       }
+      button{
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 40px;  
+        font-weight: bold;      
+      }
+      button:hover{
+        background-color: #409443; /* Green */
+        font-size: 45px;        
+      }
+      #go{
+        left: 33%;
+        top: 100px;
+        position: relative;
+        font-family: cursive;
+      }
+      #hny{
+        font-size:60px;
+        font-family: cursive;
+        left: 45%;
+        position: relative;        
+        color: #000;
+        display: none;
+      }      
     </style>
   </head>
 <body>
-  <button id="go">Go</button>
+  <div id= "controls">    
+    <button id="go">Hey dj click me</button>
+  </div>
   <audio id="bg_music">
       <source src="bg_audio2.mp3">
       Loading...
   </audio>
-<div id="container" style="display: none;">
+<div id="container" style="display: none;">  
 <svg id="face" version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="512.000000pt" height="559.000000pt" viewBox="0 0 512.000000 559.000000"
+ width="950pt" height="1000pt" viewBox="0 0 1000 950"
  preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
-<g transform="translate(0.000000,559.000000) scale(0.100000,-0.100000)"
+<g transform="translate(0.000000,950) scale(0.190000,-0.190000)"
 fill="#000000" stroke="none">
 <path d="M2975 5150 c-16 -7 -15 -8 10 -7 17 1 41 -3 55 -7 16 -5 22 -5 15 2
 -15 15 -58 21 -80 12z"/>
@@ -1848,6 +1879,7 @@ l-2 26 -4 -27 c-5 -31 -23 -39 -23 -10 0 9 4 33 10 51 12 42 7 50 -8 16z"/>
 -10 -4 -10 -10z"/>
 </g>
 </svg>
+<span id="hny">Happy New Year</span>
 </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -1861,18 +1893,20 @@ l-2 26 -4 -27 c-5 -31 -23 -39 -23 -10 0 9 4 33 10 51 12 42 7 50 -8 16z"/>
           $("#face").css("visibility","visible");
           svg.draw(function() {            
             setTimeout(function(){
-              $("#face path").addClass("fill-it");              
+              $("#face path").addClass("fill-it");
+              $("#hny").slideToggle();
             },200);
           });
           $("#bg_music")[0].play();
           setTimeout(function(){
-            $("#go").show();
+            $("#controls").show();
             $("#container").hide();
             $("#face path").removeClass("fill-it"); 
             $("#face").css("visibility","hidden");             
+            $("#hny").hide()
           },45000);
         },300);
-        $("#go").hide();
+        $("#controls").hide();
         $("#container").show();
         
         });
