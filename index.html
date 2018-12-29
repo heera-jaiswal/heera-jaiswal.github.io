@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Drawing All the Emotions</title>
+    <title>Drawing All My Emotions</title>
     <script src="https://cdn.jsdelivr.net/walkway/0.0.7/walkway.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
@@ -1884,18 +1884,23 @@ l-2 26 -4 -27 c-5 -31 -23 -39 -23 -10 0 9 4 33 10 51 12 42 7 50 -8 16z"/>
 <span id="hny">Happy New Year</span>
 </div>
     <script>
+      function path_comp(a,b){
+        return a.length-b.length;
+      }
+            
       document.addEventListener('DOMContentLoaded', function() {
         $("#go").click(function(){
           //var pwd = prompt("Your Name ?")          
           if(1 || pwd=="dj"){
             setTimeout(function(){            
-            var svg = new Walkway({
+            var my_svg = new Walkway({
             selector: '#face',
             duration: 25000,
             easing: function(t){return t*t*t*t/1.1;}
             });
             $("#face").css("visibility","visible");
-            svg.draw(function() {            
+            //my_svg.paths.sort(path_comp);
+            my_svg.draw(function() {            
               setTimeout(function(){
                 $("#face path").addClass("fill-it");
                 setTimeout(() => {
