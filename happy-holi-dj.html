@@ -10,13 +10,17 @@
         padding: 0;
         width: 100%;
         height: 100%;
-        background-color:#FFF;
+        background-color:rgb(0, 0, 0);
       }      
       path, line, polyline {
         stroke: #000;
         //stroke: none;
         stroke-width: 5px;
       }
+      @keyframes bg_color {
+            from {background-color: black;}
+            to {background-color: white;}
+        }
 
       path {
         
@@ -34,9 +38,24 @@
       	display: block;
       	visibility: hidden;
       }
+      #go{
+        left: 33%;
+        top: 100px;
+        position: relative;
+        font-family: fantasy;
+        font-size: 200%;
+      }
     </style>
   </head>
-<body>	
+<body>
+    <div id= "controls">    
+        <button id="go">Click Me</button>
+      </div>
+    <div id="container" style="display: none;"> 	
+        <audio autoplay preload="auto" id="bg_music">
+            <source src="bg_audio2.mp3">
+            Loading...
+        </audio>
     <svg id="face" version="1.0" xmlns="http://www.w3.org/2000/svg"
     width="512.000000pt" height="559.000000pt" viewBox="0 0 512.000000 559.000000"
     preserveAspectRatio="xMidYMid meet">
@@ -1843,14 +1862,16 @@
    -10 -4 -10 -10z"/>
    </g>
    </svg>
+   <h4 style="text-align: center;
+   font-size: 200%;
+   font-family: cursive;
+   padding: 0;
+   margin: 0;">Happy Birthday DJ</h4>
+</div>
    
-
-<span id="my_text" style="display: none;font-size:50px;font-family: cursive;position: relative;left:20%;color:#5d5d5d;">
-	Keep Smiling Khusat Billi :D 	
-</span>
-
     <script>
-      var color_codes=["#9400D3","#4B0082","#0000FF","#00FF00","#FFFF00","#FF7F00","#FF0000"]
+        
+      var color_codes=["#4B0082","#9400D3","#0000FF","#00FF00","#FFFF00","#FF7F00","#FF0000"];
       var counter=0;
       var $path=null;
       var divider=null;
@@ -1864,34 +1885,49 @@
         //console.log(counter);
       }
       function render(){
-        var svg = new Walkway({
-          selector: '#face',
-          duration: 10000,
-          easing: 'linear'
-        });
+        
         
         $path=$("path");
-        $path.each(function(index,obj){
-         $(obj).addClass("fill-it");
-         $(obj).css("fill",color_codes[index%7]);
-         $(obj).css("stroke",color_codes[index%7]);         
-        })
-        $("#face").css("visibility","visible");
-        $path.addClass("fill-it");
-        //draw();
         
-        svg.draw(function() {
-          
-          setTimeout(function(){
-            $("#face path").addClass("remove-stroke");
-            $("#face path").removeClass("fill-it");            
-            //$("#face").animate({height:"900px"});            
+        $("#bg_music")[0].play();
+        setTimeout(function(){
+            $path.each(function(index,obj){
+                $(obj).addClass("fill-it");
+                $(obj).css("fill",color_codes[index%7]);
+                $(obj).css("stroke",color_codes[index%7]);         
+            });
+            $("#face").css("visibility","visible");
+            $path.addClass("fill-it");
+            var svg = new Walkway({
+            selector: '#face',
+            duration: 24000,
+            easing: function(t){return t*t*t*t/1.1;}
+            });
+
+            svg.draw(function() {
+            $("body").css("animation","bg_color 4s 1");
+            $("body").css("background","white");
+            setTimeout(function(){
+                $("#face path").addClass("remove-stroke");
+                $("#face path").removeClass("fill-it");            
+                //$("#face").animate({height:"900px"});            
             
           },100);
         });
+        },0);
+        
+        //draw();
+        
+        
       }
+      
       document.addEventListener('DOMContentLoaded', function() {
-        render();
+        $("#go").click(function(){
+            render();
+            $("#controls").hide();
+            $("#container").show();
+        });
+            
       });
     </script>
   </body>
