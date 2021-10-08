@@ -1892,9 +1892,10 @@
         $("#bg_music")[0].play();
         setTimeout(function(){
             $path.each(function(index,obj){
+                val rnd = parseInt(Math.random()*10)%7;
                 $(obj).addClass("fill-it");
-                $(obj).css("fill",color_codes[index%7]);
-                $(obj).css("stroke",color_codes[index%7]);         
+                $(obj).css("fill",color_codes[rnd]);
+                $(obj).css("stroke",color_codes[rnd]);         
             });
             $("#face").css("visibility","visible");
             $path.addClass("fill-it");
